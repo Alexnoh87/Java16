@@ -13,7 +13,7 @@ public class GameTest {
     Player player3 = new Player(3, "Игрок3", 150);
     Player player4 = new Player(4, "Игрок4", 80);
     Player player5 = new Player(5, "Игрок5", 100);
-    Player player6 = new Player(6, "игрок6", 180);
+    Player player6 = new Player(6, "Игрок6", 180);
 
     @Test
     public void compareStrengthUnregisteredBothPlayers() {
@@ -25,7 +25,7 @@ public class GameTest {
 
     @Test
     public void compareStrengthUnregisteredSinglePlayer() {
-        playersRegistered.register(player2);
+        playersRegistered.register("Игрок2", player2);
 
         Assertions.assertThrows(NotRegisteredException.class, () -> {
             playersRegistered.round(player2.getName(), player1.getName());
@@ -34,24 +34,24 @@ public class GameTest {
 
     @Test
     public void comparePlayersStrengthFirstMore() {
-        playersRegistered.register(player2);
-        playersRegistered.register(player3);
+        playersRegistered.register("Игрок2", player2);
+        playersRegistered.register("Игрок3", player3);
 
         Assertions.assertEquals(1, playersRegistered.round(player2.getName(), player3.getName()));
     }
 
     @Test
     public void comparePlayersStrengthFirstLess() {
-        playersRegistered.register(player4);
-        playersRegistered.register(player6);
+        playersRegistered.register("Игрок4", player4);
+        playersRegistered.register("Игрок6", player6);
 
         Assertions.assertEquals(2, playersRegistered.round(player4.getName(), player6.getName()));
     }
 
     @Test
     public void comparePlayersStrengthEqual() {
-        playersRegistered.register(player1);
-        playersRegistered.register(player5);
+        playersRegistered.register("Игрок1", player1);
+        playersRegistered.register("Игрок5", player5);
 
         Assertions.assertEquals(0, playersRegistered.round(player1.getName(), player5.getName()));
     }
